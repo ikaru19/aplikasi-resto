@@ -1,4 +1,4 @@
-package com.syafrizal.my_geer;
+package com.syafrizal.my_geer.Activities;
 
 import android.app.DatePickerDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+
+import com.syafrizal.my_geer.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
