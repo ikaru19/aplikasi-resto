@@ -14,7 +14,7 @@
         android:layout_marginTop="76dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
-        android:hint="Email / Phone Number"
+        android:hint="Username"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
