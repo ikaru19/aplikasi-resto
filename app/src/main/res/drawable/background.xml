@@ -1,0 +1,9 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <bitmap
+            android:src="@drawable/rsz_screen"
+            android:alpha="200"
+            android:tileMode="repeat"
+            android:dither="true"/>
+    </item>
+</layer-list>

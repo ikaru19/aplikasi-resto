@@ -10,18 +10,21 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.syafrizal.my_geer.Fragments.HomeFragment;
+import com.syafrizal.my_geer.Fragments.ListFragment;
+import com.syafrizal.my_geer.Fragments.NotificationsFragment;
 import com.syafrizal.my_geer.Fragments.PinFragment;
+import com.syafrizal.my_geer.Fragments.ProfileFragment;
 import com.syafrizal.my_geer.R;
 
 public class MainActivity extends AppCompatActivity {
     Fragment fragment;
     private TextView mTextMessage;
 
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Membaca file menu dan menambahkan isinya ke action bar jika ada.
-        getMenuInflater().inflate(R.menu.setting, menu);
-        return true;
-    }
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Membaca file menu dan menambahkan isinya ke action bar jika ada.
+//        getMenuInflater().inflate(R.menu.setting, menu);
+//        return true;
+//    }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -33,15 +36,16 @@ public class MainActivity extends AppCompatActivity {
                     addFragment("pin");
                     return true;
                 case R.id.navigation_list:
-
+                    addFragment("list");
                     return true;
                 case R.id.navigation_home:
                     addFragment("home");
                     return true;
                 case R.id.navigation_notifications:
-
+                    addFragment("notification");
                     return true;
                 case R.id.navigation_profile:
+                    addFragment("profile");
                     return true;
             }
             return false;
@@ -63,18 +67,43 @@ public class MainActivity extends AppCompatActivity {
 
     private void addFragment(String tujuan) {
 
-        if (tujuan.equalsIgnoreCase("home")) {
-            fragment = new HomeFragment();
+        switch (tujuan){
+            case "home":
+                fragment = new HomeFragment();
 
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, fragment)
-                    .commit();
-        }else if(tujuan.equalsIgnoreCase("pin")){
-            fragment = new PinFragment();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, fragment)
+                        .commit();
+                break;
+            case "pin":
+                fragment = new PinFragment();
 
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, fragment)
-                    .commit();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, fragment)
+                        .commit();
+                break;
+            case "list":
+                fragment = new ListFragment();
+
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, fragment)
+                        .commit();
+                break;
+            case "profile":
+                fragment = new ProfileFragment();
+
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, fragment)
+                        .commit();
+
+                break;
+            case "notification":
+                fragment = new NotificationsFragment();
+
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, fragment)
+                        .commit();
+                break;
         }
     }
 
