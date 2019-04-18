@@ -10,10 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.syafrizal.my_geer.Activities.EmptyActivity;
 import com.syafrizal.my_geer.Model.Constant;
 import com.syafrizal.my_geer.R;
+
+import org.w3c.dom.Text;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,6 +37,12 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         preferences = this.getActivity().getSharedPreferences(Constant.SHARED_PREF, Context.MODE_PRIVATE);
         Button btnLogout = view.findViewById(R.id.btnLogoutProfile);
+        TextView txtName = view.findViewById(R.id.txtProfileName);
+        TextView txtEmail = view.findViewById(R.id.txtProfileEmail);
+
+
+        txtName.setText(preferences.getString(Constant.NAME,null));
+        txtEmail.setText("Email : "+ preferences.getString(Constant.EMAIL,null));
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
