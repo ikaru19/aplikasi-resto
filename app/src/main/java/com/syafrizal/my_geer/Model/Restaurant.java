@@ -1,16 +1,20 @@
 package com.syafrizal.my_geer.Model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Restaurant {
     String name;
-    String Address;
+    String address;
     String picture;
+    String description;
+    String phone;
     List<Menu> menus = null;
+    List<Dish> dishes = new ArrayList<>();
 
     public Restaurant(String name, String address, String picture) {
         this.name = name;
-        Address = address;
+        this.address = address;
         this.picture = picture;
     }
 
@@ -23,11 +27,11 @@ public class Restaurant {
     }
 
     public String getAddress() {
-        return Address;
+        return address;
     }
 
     public void setAddress(String address) {
-        Address = address;
+        address = address;
     }
 
     public String getPicture() {
@@ -44,5 +48,42 @@ public class Restaurant {
 
     public void setMenus(List<Menu> menus) {
         this.menus = menus;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public List<Dish> getDishes() {
+        return dishes;
+    }
+
+    public void setDishes(List<Dish> dishes) {
+        this.dishes = dishes;
+    }
+
+    @Override
+    public String toString() {
+        return "Restaurant{" +
+                "name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", picture='" + picture + '\'' +
+                ", description='" + description + '\'' +
+                ", phone='" + phone + '\'' +
+                ", menus=" + menus +
+                ", dishes=" + dishes +
+                '}';
     }
 }

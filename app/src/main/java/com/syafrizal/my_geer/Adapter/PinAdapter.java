@@ -9,18 +9,18 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.syafrizal.my_geer.Model.Menu;
-import com.syafrizal.my_geer.Model.Restaurant;
+import com.syafrizal.my_geer.Model.Location;
 import com.syafrizal.my_geer.R;
 
 import java.util.List;
 
 public class PinAdapter extends RecyclerView.Adapter<PinAdapter.ViewHolder> {
     Context context;
-    private List<Restaurant> restaurants;
+    private List<Location> locations;
     public OnAdapterClickListener listener;
 
     public interface OnAdapterClickListener{
-        void DetailonClick(Restaurant restaurant);
+        void DetailonClick(Location location);
     }
 
 
@@ -28,8 +28,8 @@ public class PinAdapter extends RecyclerView.Adapter<PinAdapter.ViewHolder> {
         this.context = context;
     }
 
-    public void setRestaurants(List<Restaurant> restaurants) {
-        this.restaurants = restaurants;
+    public void setLocations(List<Location> locations) {
+        this.locations = locations;
         notifyDataSetChanged();
     }
 
@@ -46,15 +46,15 @@ public class PinAdapter extends RecyclerView.Adapter<PinAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        Restaurant restaurant = restaurants.get(i);
-        viewHolder.txtName.setText(restaurant.getName());
-        viewHolder.txtAddr.setText(restaurant.getAddress());
+        Location location = locations.get(i);
+        viewHolder.txtName.setText(location.getRestaurant().getName());
+        viewHolder.txtAddr.setText(location.getAddress());
 
     }
 
     @Override
     public int getItemCount() {
-        return (restaurants != null) ? restaurants.size() : 0;
+        return (locations != null) ? locations.size() : 0;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -67,7 +67,7 @@ public class PinAdapter extends RecyclerView.Adapter<PinAdapter.ViewHolder> {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.DetailonClick(restaurants.get(getAdapterPosition()));
+                    listener.DetailonClick(locations.get(getAdapterPosition()));
                 }
             });
 

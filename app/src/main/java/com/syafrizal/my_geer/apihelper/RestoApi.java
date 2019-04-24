@@ -27,6 +27,9 @@ public class RestoApi {
 
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
+    public static RestaurantServices services(){
+        return retrofit.create(RestaurantServices.class);
+    }
 
     public static <UserClient> UserClient createService(Class<UserClient> serviceClass) {
 
