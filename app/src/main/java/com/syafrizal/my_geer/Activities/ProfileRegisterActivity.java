@@ -106,7 +106,7 @@ public class ProfileRegisterActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<Regist> call, Throwable t) {
-                    Toast.makeText(ProfileRegisterActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProfileRegisterActivity.this, "Check Your Connection", Toast.LENGTH_SHORT).show();
                 }
             });
 

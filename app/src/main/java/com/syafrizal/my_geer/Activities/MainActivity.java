@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void addFragment(String tujuan) {
+    public void addFragment(String tujuan) {
 
         switch (tujuan){
             case "home":

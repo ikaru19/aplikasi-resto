@@ -61,8 +61,12 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()){
                     Toast.makeText(LoginActivity.this,"Login Success",Toast.LENGTH_SHORT).show();
-                    String token  = response.body().getToken();
-                    preferences.edit().putString(Constant.TOKEN_PREF,token).apply();
+                    User user = response.body();
+                    preferences.edit()
+                            .putString(Constant.TOKEN_PREF,user.getToken())
+                            .putString(Constant.NAME,user.getUsername())
+                            .putString(Constant.EMAIL,user.getEmail())
+                            .apply();
                     Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                     startActivity(intent);
                     finish();
@@ -73,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(LoginActivity.this,"Something went wrong",Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this,"Check Your Connection",Toast.LENGTH_SHORT).show();
             }
         });
     }
