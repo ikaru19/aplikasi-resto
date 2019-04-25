@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.syafrizal.my_geer.Model.Dish;
 import com.syafrizal.my_geer.Model.Menu;
+import com.syafrizal.my_geer.Model.Order;
+import com.syafrizal.my_geer.Model.OrderMenu;
 import com.syafrizal.my_geer.R;
 
 import java.util.List;
@@ -17,6 +19,7 @@ import java.util.List;
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.ViewHolder> {
     Context context;
     List<Dish> menus;
+    public OnAdapterClickListener listener;
 
     public RestaurantAdapter(Context context) {
         this.context = context;
@@ -27,12 +30,20 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         notifyDataSetChanged();
     }
 
+    public interface OnAdapterClickListener{
+        void DetailonClick(Dish menu);
+    }
+
     @NonNull
     @Override
     public RestaurantAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(context)
                 .inflate(R.layout.item_menu,viewGroup,false);
         return new RestaurantAdapter.ViewHolder(view);
+    }
+
+    public void setListener(OnAdapterClickListener listener) {
+        this.listener = listener;
     }
 
     @Override
@@ -56,7 +67,12 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             txtJudul = itemView.findViewById(R.id.tv_judul_menu);
             txtDesc = itemView.findViewById(R.id.tv_desc_menu);
             txtHarga = itemView.findViewById(R.id.tv_harga_menu);
-
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.DetailonClick(menus.get(getAdapterPosition()));
+                }
+            });
         }
     }
 }

@@ -1,20 +1,26 @@
 package com.syafrizal.my_geer.Fragments;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.InputFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.syafrizal.my_geer.Adapter.RestaurantAdapter;
 import com.syafrizal.my_geer.Model.Dish;
 import com.syafrizal.my_geer.Model.Menu;
+import com.syafrizal.my_geer.Model.OrderMenu;
 import com.syafrizal.my_geer.Model.Restaurant;
 import com.syafrizal.my_geer.R;
 import com.syafrizal.my_geer.apihelper.RestaurantServices;
@@ -27,16 +33,27 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.app.Activity.DEFAULT_KEYS_DIALER;
+import static android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL;
+
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RestaurantFragment extends Fragment {
+public class RestaurantFragment extends Fragment implements RestaurantAdapter.OnAdapterClickListener {
 
     RecyclerView recyclerView;
+    TextView txtQty;
+    Button btnConfirm;
+
     List<Dish> menus = new ArrayList<>();
-    Restaurant restaurant;
+    List<OrderMenu> orders = new ArrayList<>();
+
+    Restaurant  restaurant;
+
     private RestaurantServices service;
     private RestaurantAdapter adapter;
+
+    int qty;
 
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
@@ -53,17 +70,33 @@ public class RestaurantFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_restaurant, container, false);
         recyclerView = view.findViewById(R.id.rv_menus);
-
+        service = RestoApi.createService(RestaurantServices.class);
         TextView textView = view.findViewById(R.id.tv_restaurant_name_menu);
         textView.setText(restaurant.getName());
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         adapter = new RestaurantAdapter(getContext());
+        adapter.setListener(this);
         getData();
+
 
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+
+
+        btnConfirm = view.findViewById(R.id.btn_conf_menu);
+        btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new ConfirmationFragment();
+                ((ConfirmationFragment) fragment).setOrders(orders);
+                ((ConfirmationFragment) fragment).setRestaurantName(restaurant.getName());
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container,fragment)
+                        .addToBackStack("tag").commit();
+            }
+        });
 
 
         return view;
@@ -72,7 +105,6 @@ public class RestaurantFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        service = RestoApi.createService(RestaurantServices.class);
 
     }
 
@@ -95,5 +127,62 @@ public class RestaurantFragment extends Fragment {
         });
 
     }
+
+    @Override
+    public void DetailonClick(final Dish menu) {
+        View alertLayout = getLayoutInflater().inflate(R.layout.dialog_qty,null);
+        final Button btnplus = alertLayout.findViewById(R.id.buttonPlus);
+        final Button btnmin = alertLayout.findViewById(R.id.buttonMinus);
+        txtQty = alertLayout.findViewById(R.id.textViewQuantity);
+        AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+        alert.setView(alertLayout);
+
+        btnmin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (qty > 0){
+                    qty = qty-1;
+                    txtQty.setText(Integer.toString(qty));
+                }
+            }
+        });
+
+        btnplus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                qty = qty+1;
+                txtQty.setText(Integer.toString(qty));
+
+            }
+        });
+
+
+        alert.setTitle("Quantity");
+        alert.setMessage("Enter Quantity");
+
+        alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                orders.add(new OrderMenu(menu.getName(),qty,menu.getPrice()));
+                qty = 0;
+                Toast.makeText(getContext(),"Added to Cart",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // do nothing
+            }
+        });
+        alert.show();
+    }
+
+
+
+
+
 
 }

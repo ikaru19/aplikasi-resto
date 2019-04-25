@@ -10,6 +10,18 @@
         <item>Female</item>
     </string-array>
 
+    <string-array name="serve_arrays">
+        <item>On Arrival</item>
+        <item>Now</item>
+    </string-array>
+
+    <string-array name="payment_arrays">
+        <item>Gopay</item>
+        <item>OVO</item>
+    </string-array>
+
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
