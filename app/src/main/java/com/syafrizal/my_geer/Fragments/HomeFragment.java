@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.SearchView;
 
 import com.syafrizal.my_geer.R;
 import com.synnapps.carouselview.CarouselView;
@@ -15,10 +16,11 @@ import com.synnapps.carouselview.ImageListener;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements  SearchView.OnQueryTextListener {
 
     CarouselView carouselView;
     int[] carouselImages = {R.drawable.image1,R.drawable.image2};
+    SearchView searchView;
 
     ImageListener imageListener = new ImageListener() {
         @Override
@@ -41,11 +43,27 @@ public class HomeFragment extends Fragment {
         carouselView.setPageCount(carouselImages.length);
 
         carouselView.setImageListener(imageListener);
+        searchView = view.findViewById(R.id.main_search);
+        searchView.setOnQueryTextListener(this);
+
+
 
         return  view;
     }
 
 
+    @Override
+    public boolean onQueryTextSubmit(String query) {
 
+        return false;
+    }
 
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        Fragment fragment = new PinFragment();
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container,fragment)
+                .addToBackStack("tag").commit();
+        return false;
+    }
 }

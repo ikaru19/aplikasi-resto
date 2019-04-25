@@ -4,18 +4,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Restaurant {
+    String id;
     String name;
     String address;
     String picture;
     String description;
     String phone;
-    List<Menu> menus = null;
-    List<Dish> dishes = new ArrayList<>();
+
+    List<Dish> dish = new ArrayList<>();
 
     public Restaurant(String name, String address, String picture) {
         this.name = name;
         this.address = address;
         this.picture = picture;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -42,13 +51,6 @@ public class Restaurant {
         this.picture = picture;
     }
 
-    public List<Menu> getMenus() {
-        return menus;
-    }
-
-    public void setMenus(List<Menu> menus) {
-        this.menus = menus;
-    }
 
     public String getDescription() {
         return description;
@@ -67,11 +69,11 @@ public class Restaurant {
     }
 
     public List<Dish> getDishes() {
-        return dishes;
+        return dish;
     }
 
     public void setDishes(List<Dish> dishes) {
-        this.dishes = dishes;
+        this.dish = dishes;
     }
 
     @Override
@@ -82,8 +84,7 @@ public class Restaurant {
                 ", picture='" + picture + '\'' +
                 ", description='" + description + '\'' +
                 ", phone='" + phone + '\'' +
-                ", menus=" + menus +
-                ", dishes=" + dishes +
+                ", dishes=" + dish +
                 '}';
     }
 }

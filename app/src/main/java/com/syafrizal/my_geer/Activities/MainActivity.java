@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.syafrizal.my_geer.Fragments.HomeFragment;
@@ -15,6 +17,7 @@ import com.syafrizal.my_geer.Fragments.NotificationsFragment;
 import com.syafrizal.my_geer.Fragments.PinFragment;
 import com.syafrizal.my_geer.Fragments.ProfileFragment;
 import com.syafrizal.my_geer.Fragments.RestaurantFragment;
+import com.syafrizal.my_geer.Fragments.TransDetailFragment;
 import com.syafrizal.my_geer.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -63,7 +66,12 @@ public class MainActivity extends AppCompatActivity {
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.navigation_home);
+        SearchView searchView = findViewById(R.id.main_search);
+
     }
+
+
+
 
 
     public void addFragment(String tujuan) {
@@ -111,7 +119,16 @@ public class MainActivity extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container,fragment)
                         .commit();
+                break;
+            case "transaksi":
+                fragment = new TransDetailFragment();
+
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container,fragment)
+                        .commit();
+                break;
         }
     }
+
 
 }

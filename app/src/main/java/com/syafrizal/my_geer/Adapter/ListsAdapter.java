@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.syafrizal.my_geer.Model.Location;
 import com.syafrizal.my_geer.Model.Order;
 import com.syafrizal.my_geer.R;
 
@@ -17,6 +18,7 @@ import java.util.List;
 public class ListsAdapter extends RecyclerView.Adapter<ListsAdapter.ViewHolder> {
     private Context context;
     private List<Order> orders;
+    public OnAdapterClickListener listener;
 
     public ListsAdapter(Context context) {
         this.context = context;
@@ -25,6 +27,14 @@ public class ListsAdapter extends RecyclerView.Adapter<ListsAdapter.ViewHolder> 
     public void setOrders(List<Order> orders) {
         this.orders = orders;
         notifyDataSetChanged();
+    }
+
+    public interface OnAdapterClickListener{
+        void DetailonClick(Order order);
+    }
+
+    public void setListener(OnAdapterClickListener listener) {
+        this.listener = listener;
     }
 
     @NonNull
@@ -61,6 +71,13 @@ public class ListsAdapter extends RecyclerView.Adapter<ListsAdapter.ViewHolder> 
             txtStatus = itemView.findViewById(R.id.tvListStatus);
             txtRestoName = itemView.findViewById(R.id.tvListName);
             txtAddres = itemView.findViewById(R.id.tvListAddres);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.DetailonClick(orders.get(getAdapterPosition()));
+                }
+            });
+
         }
     }
 }

@@ -25,7 +25,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:iconifiedByDefault="false"
-                android:queryHint="@string/search_hint">
+                android:queryHint="@string/search_hint"
+                android:clickable="true"
+                android:editable="false"
+                android:onClick="searchOnClick">
 
             </SearchView>
         </android.support.v7.widget.CardView>

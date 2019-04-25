@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.syafrizal.my_geer.Model.Dish;
 import com.syafrizal.my_geer.Model.Menu;
 import com.syafrizal.my_geer.R;
 
@@ -15,13 +16,13 @@ import java.util.List;
 
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.ViewHolder> {
     Context context;
-    List<Menu> menus;
+    List<Dish> menus;
 
     public RestaurantAdapter(Context context) {
         this.context = context;
     }
 
-    public void setMenus(List<Menu> menus) {
+    public void setMenus(List<Dish> menus) {
         this.menus = menus;
         notifyDataSetChanged();
     }
@@ -36,16 +37,16 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull RestaurantAdapter.ViewHolder viewHolder, int i) {
-        Menu menu = menus.get(i);
-        viewHolder.txtJudul.setText(menu.getName());
-        viewHolder.txtDesc.setText(menu.getDesc());
-        viewHolder.txtHarga.setText(Integer.toString(menu.getPrice()));
+        Dish dish = menus.get(i);
+        viewHolder.txtJudul.setText(dish.getName());
+        viewHolder.txtDesc.setText(dish.getDescription());
+        viewHolder.txtHarga.setText(Integer.toString(dish.getPrice()));
 
     }
 
     @Override
     public int getItemCount() {
-        return (menus.isEmpty()) ? 0 : menus.size();
+        return (menus == null) ? 0 : menus.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
