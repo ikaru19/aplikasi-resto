@@ -66,7 +66,7 @@ public class PinFragment extends Fragment  implements PinAdapter.OnAdapterClickL
 
     @Override
     public void DetailonClick(Location restaurant) {
-        ((MainActivity) getActivity()).addFragment("home");
+        ((MainActivity) getActivity()).addFragment("restaurant");
     }
 
     @Override

@@ -14,6 +14,7 @@ import com.syafrizal.my_geer.Fragments.ListFragment;
 import com.syafrizal.my_geer.Fragments.NotificationsFragment;
 import com.syafrizal.my_geer.Fragments.PinFragment;
 import com.syafrizal.my_geer.Fragments.ProfileFragment;
+import com.syafrizal.my_geer.Fragments.RestaurantFragment;
 import com.syafrizal.my_geer.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -104,6 +105,12 @@ public class MainActivity extends AppCompatActivity {
                         .replace(R.id.fragment_container, fragment)
                         .commit();
                 break;
+            case "restaurant":
+                fragment = new RestaurantFragment();
+
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container,fragment)
+                        .commit();
         }
     }
 
