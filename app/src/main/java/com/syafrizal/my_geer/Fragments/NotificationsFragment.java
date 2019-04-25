@@ -12,9 +12,12 @@ import android.view.ViewGroup;
 import com.syafrizal.my_geer.Adapter.NotificationsAdapter;
 import com.syafrizal.my_geer.Model.Notification;
 import com.syafrizal.my_geer.R;
+import com.syafrizal.my_geer.config.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.paperdb.Paper;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -50,16 +53,8 @@ public class NotificationsFragment extends Fragment {
     }
 
     public void initDataset(){
-        notifications.add(new Notification("Makan Murah Diskon","Bayar gratis diskon 100%"));
-        notifications.add(new Notification("Makan Murah Diskon","Bayar gratis diskon 100%"));
-        notifications.add(new Notification("Makan Murah Diskon","Bayar gratis diskon 100%"));
-        notifications.add(new Notification("Makan Murah Diskon","Bayar gratis diskon 100%"));
-        notifications.add(new Notification("Makan Murah Diskon","Bayar gratis diskon 100%"));
-        notifications.add(new Notification("Makan Murah Diskon","Bayar gratis diskon 100%"));
-        notifications.add(new Notification("Makan Murah Diskon","Bayar gratis diskon 100%"));
-        notifications.add(new Notification("Makan Murah Diskon","Bayar gratis diskon 100%"));
-        notifications.add(new Notification("Makan Murah Diskon","Bayar gratis diskon 100%"));
-
+        List<Notification> notificationList = Paper.book().read(Constants.PaperDB.NOTIFICATIONS);
+        notifications.addAll(notificationList);
     }
 
 }
