@@ -5,20 +5,28 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.syafrizal.my_geer.Fragments.HomeFragment;
 import com.syafrizal.my_geer.Fragments.ListFragment;
 import com.syafrizal.my_geer.Fragments.NotificationsFragment;
 import com.syafrizal.my_geer.Fragments.PinFragment;
 import com.syafrizal.my_geer.Fragments.ProfileFragment;
-import com.syafrizal.my_geer.Fragments.RestaurantFragment;
-import com.syafrizal.my_geer.Fragments.TransDetailFragment;
+import com.syafrizal.my_geer.Model.Notification;
 import com.syafrizal.my_geer.R;
+import com.syafrizal.my_geer.config.Constants;
+
+import java.util.ArrayList;
+
+import io.paperdb.Paper;
 
 public class MainActivity extends AppCompatActivity {
     Fragment fragment;
@@ -56,22 +64,48 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    public void initPaperDb(){
+        //init paperdb
+        Paper.init(this);
+        if(Paper.book().read(Constants.PaperDB.NOTIFICATIONS) == null)
+            Paper.book().write(Constants.PaperDB.NOTIFICATIONS,new ArrayList<Notification>());
+
+//        if(Paper.book().read("notification"))
+//        Paper.book().write("notification",)
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        initPaperDb();
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.navigation_home);
-        SearchView searchView = findViewById(R.id.main_search);
 
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w("TES", "getInstanceId failed", task.getException());
+                            return;
+                        }
+
+                        // Get new Instance ID token
+                        String token = task.getResult().getToken();
+
+                        // Log and toast
+//                        String msg = getString(R.string.msg_token_fmt, token);
+//                        Log.d("TES", msg);
+//                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
-
-
-
 
 
     public void addFragment(String tujuan) {
@@ -113,22 +147,7 @@ public class MainActivity extends AppCompatActivity {
                         .replace(R.id.fragment_container, fragment)
                         .commit();
                 break;
-            case "restaurant":
-                fragment = new RestaurantFragment();
-
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container,fragment)
-                        .commit();
-                break;
-            case "transaksi":
-                fragment = new TransDetailFragment();
-
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container,fragment)
-                        .commit();
-                break;
         }
     }
-
 
 }

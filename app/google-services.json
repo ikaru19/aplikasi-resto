@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "267600192736",
+    "firebase_url": "https://my-geer.firebaseio.com",
+    "project_id": "my-geer",
+    "storage_bucket": "my-geer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:267600192736:android:83a22d74332cb4cc",
+        "android_client_info": {
+          "package_name": "com.syafrizal.my_geer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "267600192736-thm3gij61lpbrnhmrruthforirl1vau7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-0SSlCs2DpDcYHS9N0Hdd9HBzIAYqzgg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "267600192736-thm3gij61lpbrnhmrruthforirl1vau7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
