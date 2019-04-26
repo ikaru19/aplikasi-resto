@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.telecom.Call;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +14,18 @@ import android.widget.Toast;
 
 import com.syafrizal.my_geer.Activities.MainActivity;
 import com.syafrizal.my_geer.Adapter.ListsAdapter;
-import com.syafrizal.my_geer.Model.Order;
+import com.syafrizal.my_geer.Model.Booking;
+import com.syafrizal.my_geer.Model.Constant;
 import com.syafrizal.my_geer.R;
+import com.syafrizal.my_geer.apihelper.RestoApi;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.paperdb.Paper;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,9 +33,9 @@ import java.util.List;
 public class ListFragment extends Fragment implements ListsAdapter.OnAdapterClickListener{
 
     RecyclerView recyclerView;
-    List<Order> orders = new ArrayList<>();
+    List<Booking> bookings = new ArrayList<>();
 
-
+    ListsAdapter adapter;
     public ListFragment() {
         // Required empty public constructor
     }
@@ -46,9 +52,9 @@ public class ListFragment extends Fragment implements ListsAdapter.OnAdapterClic
 
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-        ListsAdapter adapter = new ListsAdapter(getContext());
+        adapter = new ListsAdapter(getContext());
 
-        adapter.setOrders(orders);
+        adapter.setBookings(bookings);
         adapter.setListener(this);
 
         recyclerView.setAdapter(adapter);
@@ -66,11 +72,23 @@ public class ListFragment extends Fragment implements ListsAdapter.OnAdapterClic
     }
 
     public void initData(){
-        Call<Order>
+        Call<List<Booking>> bookingCall = RestoApi.services().myBookings((String) Paper.book().read(Constant.TOKEN_PREF));
+        bookingCall.enqueue(new Callback<List<Booking>>() {
+            @Override
+            public void onResponse(Call<List<Booking>> call, Response<List<Booking>> response) {
+                bookings.addAll(response.body());
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<List<Booking>> call, Throwable t) {
+                // TODO errorresponse hanlder
+            }
+        });
     }
 
     @Override
-    public void DetailonClick(Order order) {
+    public void DetailonClick(Booking booking) {
         getActivity().getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container,new TransDetailFragment())
                 .addToBackStack("tag").commit();

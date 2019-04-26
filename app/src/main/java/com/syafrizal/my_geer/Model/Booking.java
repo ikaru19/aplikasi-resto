@@ -1,6 +1,7 @@
 package com.syafrizal.my_geer.Model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Booking {
     private Integer id;
@@ -13,6 +14,10 @@ public class Booking {
     private String notes;
     private Date created_at;
     private Date updated_at;
+    private List<BookingDishes> booking_dish;
+    private List<Dish> dish;
+    private Location location;
+    private Restaurant restaurant;
 
     public Integer getId() {
         return id;
@@ -92,6 +97,38 @@ public class Booking {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    public List<BookingDishes> getBooking_dish() {
+        return booking_dish;
+    }
+
+    public void setBooking_dish(List<BookingDishes> booking_dish) {
+        this.booking_dish = booking_dish;
+    }
+
+    public List<Dish> getDish() {
+        return dish;
+    }
+
+    public void setDish(List<Dish> dish) {
+        this.dish = dish;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 
     @Override

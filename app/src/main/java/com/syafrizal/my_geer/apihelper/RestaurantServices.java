@@ -33,5 +33,5 @@ public interface RestaurantServices {
     Call<BookingDishes> bookDishes(@Body BookingDishes booking);
 
     @GET("/my_bookings")
-    Call<Booking> myBookings(@Header("Authorization") String auth);
+    Call<List<Booking>> myBookings(@Header("Authorization") String auth);
 }

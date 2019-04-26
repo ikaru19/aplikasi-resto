@@ -10,27 +10,27 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.syafrizal.my_geer.Model.Location;
-import com.syafrizal.my_geer.Model.Order;
+import com.syafrizal.my_geer.Model.Booking;
 import com.syafrizal.my_geer.R;
 
 import java.util.List;
 
 public class ListsAdapter extends RecyclerView.Adapter<ListsAdapter.ViewHolder> {
     private Context context;
-    private List<Order> orders;
+    private List<Booking> bookings;
     public OnAdapterClickListener listener;
 
     public ListsAdapter(Context context) {
         this.context = context;
     }
 
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
         notifyDataSetChanged();
     }
 
     public interface OnAdapterClickListener{
-        void DetailonClick(Order order);
+        void DetailonClick(Booking booking);
     }
 
     public void setListener(OnAdapterClickListener listener) {
@@ -47,19 +47,29 @@ public class ListsAdapter extends RecyclerView.Adapter<ListsAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ListsAdapter.ViewHolder viewHolder, int i) {
-        Order order = orders.get(i);
-        if (order.getStatus().equalsIgnoreCase("Order Placed")){
+        Booking booking = bookings.get(i);
+        if (booking.getStatus().equalsIgnoreCase("placed")){
             viewHolder.txtStatus.setTextColor(Color.rgb(201,226,101));
         }
-        viewHolder.txtStatus.setText(order.getStatus());
-        viewHolder.txtRestoName.setText(order.getName());
-        viewHolder.txtAddres.setText(order.getAddress());
+        viewHolder.txtStatus.setText(getStatusText(booking.getStatus()));
+        viewHolder.txtRestoName.setText(booking.getRestaurant().getName());
+        viewHolder.txtAddres.setText(booking.getLocation().getAddress());
 
+    }
+
+    private String getStatusText(String status) {
+        switch (status){
+            case "placed":
+                return "Order Placed";
+            case "completed":
+                return "Order Completed";
+        }
+        return "";
     }
 
     @Override
     public int getItemCount() {
-        return (orders != null) ? orders.size() : 0;
+        return (bookings != null) ? bookings.size() : 0;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -74,7 +84,7 @@ public class ListsAdapter extends RecyclerView.Adapter<ListsAdapter.ViewHolder> 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.DetailonClick(orders.get(getAdapterPosition()));
+                    listener.DetailonClick(bookings.get(getAdapterPosition()));
                 }
             });
 
