@@ -120,8 +120,6 @@ public class ConfirmationFragment extends Fragment implements View.OnClickListen
 
                 }else{
                     bookingDish(0,response.body().getId());
-                    Toast.makeText(getContext(),"Order Placed",Toast.LENGTH_SHORT).show();
-                    ((MainActivity)getActivity()).addFragment("list");
                 }
             }
 
@@ -147,10 +145,13 @@ public class ConfirmationFragment extends Fragment implements View.OnClickListen
                     @Override
                     public void onResponse(Call<BookingDishes> call, Response<BookingDishes> response) {
                         //todo success response jika berhasil order disini
+                        Toast.makeText(getContext(),"Order Placed",Toast.LENGTH_SHORT).show();
+                        ((MainActivity)getActivity()).addFragment("list");
                     }
 
                     @Override
                     public void onFailure(Call<BookingDishes> call, Throwable t) {
+                        Toast.makeText(getContext(),"Check your connection",Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -163,6 +164,7 @@ public class ConfirmationFragment extends Fragment implements View.OnClickListen
 
                     @Override
                     public void onFailure(Call<BookingDishes> call, Throwable t) {
+                        Toast.makeText(getContext(),"Check your connection",Toast.LENGTH_SHORT).show();
 
                     }
                 });
