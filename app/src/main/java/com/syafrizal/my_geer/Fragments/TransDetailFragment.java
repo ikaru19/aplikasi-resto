@@ -64,7 +64,7 @@ public class TransDetailFragment extends Fragment {
         String dateString = format.format(booking.getCreated_at());
 
         txtResName.setText(booking.getRestaurant().getName());
-        txtCode.setText(Integer.toString(booking.getId()));
+        txtCode.setText("Order No : " + Integer.toString(booking.getId()));
         txtStatus.setText("ORDER "+booking.getStatus().toUpperCase());
         txtPrice.setText("Rp "+Integer.toString(booking.getTotal_price()));
         txtNotes.setText(booking.getNotes());

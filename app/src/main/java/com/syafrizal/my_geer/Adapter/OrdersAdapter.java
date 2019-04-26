@@ -37,8 +37,8 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
     public void onBindViewHolder(@NonNull OrdersAdapter.ViewHolder viewHolder, int i) {
         OrderMenu orderMenu = orders.get(i);
         viewHolder.txtName.setText(orderMenu.getName());
-        viewHolder.txtQty.setText(Integer.toString(orderMenu.getTotal()));
-        viewHolder.txtPrice.setText(Integer.toString(orderMenu.getPrice()));
+        viewHolder.txtQty.setText(Integer.toString(orderMenu.getTotal()) + "x");
+        viewHolder.txtPrice.setText("Rp."+Integer.toString(orderMenu.getPrice()));
     }
 
     @Override

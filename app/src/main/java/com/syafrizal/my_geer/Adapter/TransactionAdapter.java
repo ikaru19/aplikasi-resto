@@ -46,7 +46,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
         viewHolder.txtName.setText(dish.getName());
         viewHolder.txtQty.setText(Integer.toString(booking.getQuantity()));
-        viewHolder.txtPrice.setText(Integer.toString(dish.getPrice()));
+        viewHolder.txtPrice.setText("Rp." + Integer.toString(dish.getPrice()));
     }
 
     @Override
