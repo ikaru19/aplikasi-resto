@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Location {
+    Integer id;
     String position;
     String address;
     String name;
@@ -52,5 +53,13 @@ public class Location {
                 ", name='" + name + '\'' +
                 ", restaurant=" + restaurant +
                 '}';
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getId() {
+        return id;
     }
 }

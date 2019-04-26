@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.syafrizal.my_geer.Adapter.RestaurantAdapter;
 import com.syafrizal.my_geer.Model.Dish;
+import com.syafrizal.my_geer.Model.Location;
 import com.syafrizal.my_geer.Model.Menu;
 import com.syafrizal.my_geer.Model.OrderMenu;
 import com.syafrizal.my_geer.Model.Restaurant;
@@ -48,16 +49,14 @@ public class RestaurantFragment extends Fragment implements RestaurantAdapter.On
     List<Dish> menus = new ArrayList<>();
     List<OrderMenu> orders = new ArrayList<>();
 
+    Location  location;
     Restaurant  restaurant;
+
 
     private RestaurantServices service;
     private RestaurantAdapter adapter;
 
     int qty;
-
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
-    }
 
     public RestaurantFragment() {
         // Required empty public constructor
@@ -92,6 +91,7 @@ public class RestaurantFragment extends Fragment implements RestaurantAdapter.On
                 Fragment fragment = new ConfirmationFragment();
                 ((ConfirmationFragment) fragment).setOrders(orders);
                 ((ConfirmationFragment) fragment).setRestaurantName(restaurant.getName());
+                ((ConfirmationFragment) fragment).setLocationId(location.getId());
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container,fragment)
                         .addToBackStack("tag").commit();
@@ -181,8 +181,8 @@ public class RestaurantFragment extends Fragment implements RestaurantAdapter.On
     }
 
 
-
-
-
-
+    public void setLocation(Location location) {
+        this.location = location;
+        this.restaurant = location.getRestaurant();
+    }
 }

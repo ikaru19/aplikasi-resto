@@ -82,7 +82,7 @@ public class PinFragment extends Fragment  implements PinAdapter.OnAdapterClickL
     @Override
     public void DetailonClick(Location location) {
         Fragment fragment = new RestaurantFragment();
-        ((RestaurantFragment) fragment).setRestaurant(location.getRestaurant());
+        ((RestaurantFragment) fragment).setLocation(location);
         getActivity().getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container,fragment)
                 .addToBackStack("tag").commit();
