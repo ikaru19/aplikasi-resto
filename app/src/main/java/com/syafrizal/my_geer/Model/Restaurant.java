@@ -8,6 +8,7 @@ public class Restaurant {
     String name;
     String address;
     String picture;
+    String image;
     String description;
     String phone;
 
@@ -51,6 +52,13 @@ public class Restaurant {
         this.picture = picture;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public String getDescription() {
         return description;
