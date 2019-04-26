@@ -68,6 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                             .putString(Constant.TOKEN_PREF,user.getToken())
                             .putString(Constant.NAME,user.getUsername())
                             .putString(Constant.EMAIL,user.getEmail())
+                            .putString(Constant.PHONE,user.getPhone())
                             .apply();
                     Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                     startActivity(intent);

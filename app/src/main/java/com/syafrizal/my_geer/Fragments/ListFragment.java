@@ -91,6 +91,7 @@ public class ListFragment extends Fragment implements ListsAdapter.OnAdapterClic
     public void DetailonClick(Booking booking) {
         Fragment fragment = new TransDetailFragment();
         ((TransDetailFragment) fragment).setBooking(booking);
+
         getActivity().getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container,fragment)
                 .addToBackStack("tag").commit();

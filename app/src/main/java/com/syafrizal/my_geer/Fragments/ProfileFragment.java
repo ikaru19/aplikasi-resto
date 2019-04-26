@@ -39,10 +39,11 @@ public class ProfileFragment extends Fragment {
         Button btnLogout = view.findViewById(R.id.btnLogoutProfile);
         TextView txtName = view.findViewById(R.id.txtProfileName);
         TextView txtEmail = view.findViewById(R.id.txtProfileEmail);
-
+        TextView txtPhone = view.findViewById(R.id.txtProfileNumber);
 
         txtName.setText(preferences.getString(Constant.NAME,null));
         txtEmail.setText("Email : "+ preferences.getString(Constant.EMAIL,null));
+        txtPhone.setText("Phone : "+preferences.getString(Constant.PHONE,null));
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override

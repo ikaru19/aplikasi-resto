@@ -16,7 +16,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
-    EditText txtUsername , txtPassword , txtEmail;
+    EditText txtUsername , txtPassword , txtEmail , txtPhone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +25,7 @@ public class RegisterActivity extends AppCompatActivity {
         txtUsername = findViewById(R.id.etUsernameRegister);
         txtEmail = findViewById(R.id.etEmailRegister);
         txtPassword = findViewById(R.id.etPasswordRegister);
+        txtPhone = findViewById(R.id.etPhoneNumberReg);
 
     }
 
@@ -34,6 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
         String password = txtPassword.getText().toString();
         String email = txtEmail.getText().toString();
         String username = txtUsername.getText().toString();
+        String phone = txtPhone.getText().toString();
 
         if (isEmailValid(email)){
             register.setEmail(email);
@@ -41,6 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
                 register.setPassword(password);
                 register.setPassword_confirm(password);
                 register.setUsername(username);
+                register.setPhone(phone);
                 intent.putExtra("register", register);
                 startActivity(intent);
             }else{

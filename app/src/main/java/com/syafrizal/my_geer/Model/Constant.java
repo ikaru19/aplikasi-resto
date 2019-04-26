@@ -6,5 +6,6 @@ public class Constant {
     public static final String ISLOGIN_PREF = "islogin";
     public static final String NAME = "myname";
     public static final String EMAIL = "myemail";
+    public static final String PHONE = "myphone";
 
 }

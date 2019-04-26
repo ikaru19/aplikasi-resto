@@ -51,7 +51,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         Dish dish = menus.get(i);
         viewHolder.txtJudul.setText(dish.getName());
         viewHolder.txtDesc.setText(dish.getDescription());
-        viewHolder.txtHarga.setText(Integer.toString(dish.getPrice()));
+        viewHolder.txtHarga.setText("Rp. " + Integer.toString(dish.getPrice()));
 
     }
 

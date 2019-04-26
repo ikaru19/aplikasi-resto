@@ -117,7 +117,9 @@ public class ConfirmationFragment extends Fragment implements View.OnClickListen
                     Intent intent = new Intent(getActivity(), EmptyActivity.class);
                     startActivity(intent);
                     getActivity().finish();
+
                 }else{
+                    bookingDish(0,response.body().getId());
                     Toast.makeText(getContext(),"Order Placed",Toast.LENGTH_SHORT).show();
                     ((MainActivity)getActivity()).addFragment("list");
                 }

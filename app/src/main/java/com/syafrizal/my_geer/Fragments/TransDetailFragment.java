@@ -65,7 +65,7 @@ public class TransDetailFragment extends Fragment {
 
         txtResName.setText(booking.getRestaurant().getName());
         txtCode.setText(Integer.toString(booking.getId()));
-        txtStatus.setText(booking.getStatus());
+        txtStatus.setText("ORDER "+booking.getStatus().toUpperCase());
         txtPrice.setText("Rp "+Integer.toString(booking.getTotal_price()));
         txtNotes.setText(booking.getNotes());
         txtDate.setText(dateString);
@@ -98,7 +98,7 @@ public class TransDetailFragment extends Fragment {
         adapter.setDishes(booking.getDish());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
-        
+
 
         return view;
     }
