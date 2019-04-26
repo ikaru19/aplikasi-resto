@@ -165,7 +165,7 @@ public class RestaurantFragment extends Fragment implements RestaurantAdapter.On
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                orders.add(new OrderMenu(menu.getName(),qty,menu.getPrice()));
+                orders.add(new OrderMenu(menu.getId(),menu.getName(),qty,menu.getPrice()));
                 qty = 0;
                 Toast.makeText(getContext(),"Added to Cart",Toast.LENGTH_SHORT).show();
             }

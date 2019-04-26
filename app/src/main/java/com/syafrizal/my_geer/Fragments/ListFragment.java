@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.telecom.Call;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,10 +66,7 @@ public class ListFragment extends Fragment implements ListsAdapter.OnAdapterClic
     }
 
     public void initData(){
-        orders.add(new Order("Bakso Enak","jl Kisamaun No 17 Tangerang","Order Placed"));
-        orders.add(new Order("Bakso Enak","jl Kisamaun No 17 Tangerang","Order Completed"));
-        orders.add(new Order("Bakso Enak","jl Kisamaun No 17 Tangerang","Order Completed"));
-        orders.add(new Order("Bakso Enak","jl Kisamaun No 17 Tangerang","Order Completed"));
+        Call<Order>
     }
 
     @Override

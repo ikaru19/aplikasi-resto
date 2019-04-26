@@ -6,8 +6,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.syafrizal.my_geer.Model.Menu;
 import com.syafrizal.my_geer.Model.Location;
 import com.syafrizal.my_geer.R;
@@ -49,6 +51,7 @@ public class PinAdapter extends RecyclerView.Adapter<PinAdapter.ViewHolder> {
         Location location = locations.get(i);
         viewHolder.txtName.setText(location.getRestaurant().getName());
         viewHolder.txtAddr.setText(location.getAddress());
+        Picasso.get().load(location.getRestaurant().getImage()).into(viewHolder.imgResto);
 
     }
 
@@ -60,10 +63,12 @@ public class PinAdapter extends RecyclerView.Adapter<PinAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtName;
         TextView txtAddr;
+        ImageView imgResto;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtName = itemView.findViewById(R.id.tv_pin_restaurant_name);
             txtAddr = itemView.findViewById(R.id.tv_pin_restaurant_addr);
+            imgResto = itemView.findViewById(R.id.iv_pin_restaurant);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

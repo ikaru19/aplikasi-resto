@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import android.widget.Toast;
 
 import com.syafrizal.my_geer.Adapter.OrdersAdapter;
 import com.syafrizal.my_geer.Model.Booking;
+import com.syafrizal.my_geer.Model.BookingDishes;
+import com.syafrizal.my_geer.Model.Constant;
 import com.syafrizal.my_geer.Model.OrderMenu;
 import com.syafrizal.my_geer.R;
 import com.syafrizal.my_geer.apihelper.RestoApi;
@@ -24,6 +27,7 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.paperdb.Paper;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -31,7 +35,7 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ConfirmationFragment extends Fragment implements View.OnClickListener, Callback<Booking> {
+public class ConfirmationFragment extends Fragment implements View.OnClickListener {
     List<OrderMenu> orders = new ArrayList<>();
     String restaurantName;
     Spinner spinnerPayment,spinnerServe;
@@ -57,6 +61,7 @@ public class ConfirmationFragment extends Fragment implements View.OnClickListen
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_confirmation, container, false);
         recyclerView = view.findViewById(R.id.rv_orders);
@@ -88,24 +93,62 @@ public class ConfirmationFragment extends Fragment implements View.OnClickListen
         for(OrderMenu o : orders){
             total += o.getPrice() *o.getTotal();
         }
-        Booking booking = new Booking();
+        final Booking booking = new Booking();
         booking.setLocations_id(locationId);
         booking.setTotal_price(total);
         booking.setStatus("placed");
         booking.setNotes(editText.getText().toString());
         booking.setServing_type(spinnerServe.getSelectedItem().toString());
         booking.setPayment_type(spinnerPayment.getSelectedItem().toString());
-        Call<Booking> bookingCall = RestoApi.services().books(booking);
-        bookingCall.enqueue(this );
+        Call<Booking> bookingCall = RestoApi.services().books(booking, (String) Paper.book().read(Constant.TOKEN_PREF));
+        bookingCall.enqueue(new Callback<Booking>() {
+            @Override
+            public void onResponse(Call<Booking> call, Response<Booking> response) {
+                Log.d("TES",response.body().toString());
+                bookingDish(0,response.body().getId());
+            }
+
+            @Override
+            public void onFailure(Call<Booking> call, Throwable t) {
+
+            }
+        });
     }
 
-    @Override
-    public void onResponse(Call<Booking> call, Response<Booking> response) {
-//        !todo beri response handler
+    public void bookingDish(int index, final int bookingId){
+
+            OrderMenu o = orders.get(index);
+            final BookingDishes bookingDishes = new BookingDishes();
+            bookingDishes.setDish_id(o.getId());
+            bookingDishes.setBooking_id(bookingId);
+            bookingDishes.setQuantity(o.getTotal());
+            Call<BookingDishes> bookingDishesCall = RestoApi.services().bookDishes(bookingDishes);
+            final int finalIndex =index +1;
+            if(index == orders.size() -1){
+                bookingDishesCall.enqueue(new Callback<BookingDishes>() {
+                    @Override
+                    public void onResponse(Call<BookingDishes> call, Response<BookingDishes> response) {
+                        //todo success response jika berhasil order disini
+                    }
+
+                    @Override
+                    public void onFailure(Call<BookingDishes> call, Throwable t) {
+
+                    }
+                });
+            }else {
+                bookingDishesCall.enqueue(new Callback<BookingDishes>() {
+                    @Override
+                    public void onResponse(Call<BookingDishes> call, Response<BookingDishes> response) {
+                        bookingDish(finalIndex, bookingId);
+                    }
+
+                    @Override
+                    public void onFailure(Call<BookingDishes> call, Throwable t) {
+
+                    }
+                });
+            }
     }
 
-    @Override
-    public void onFailure(Call<Booking> call, Throwable t) {
-        // !todo beri error handler
-    }
 }

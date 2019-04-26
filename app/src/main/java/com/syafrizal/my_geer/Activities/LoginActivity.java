@@ -16,6 +16,7 @@ import com.syafrizal.my_geer.R;
 import com.syafrizal.my_geer.apihelper.RestoApi;
 import com.syafrizal.my_geer.apihelper.UserClient;
 
+import io.paperdb.Paper;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -34,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         et_mail = findViewById(R.id.editTextEmail);
         et_password = findViewById(R.id.editTextPassword);
         preferences = getSharedPreferences(Constant.SHARED_PREF,MODE_PRIVATE);
-
+        Paper.init(this);
         if (preferences.getString(Constant.TOKEN_PREF,null) !=null){
             Intent intent = new Intent(this,MainActivity.class);
             startActivity(intent);
@@ -62,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.isSuccessful()){
                     Toast.makeText(LoginActivity.this,"Login Success",Toast.LENGTH_SHORT).show();
                     User user = response.body();
+                    Paper.book().write(Constant.TOKEN_PREF,user.getToken());
                     preferences.edit()
                             .putString(Constant.TOKEN_PREF,user.getToken())
                             .putString(Constant.NAME,user.getUsername())
