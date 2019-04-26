@@ -1,6 +1,9 @@
 package com.syafrizal.my_geer.Fragments;
 
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +17,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.syafrizal.my_geer.Activities.EmptyActivity;
+import com.syafrizal.my_geer.Activities.MainActivity;
 import com.syafrizal.my_geer.Adapter.OrdersAdapter;
 import com.syafrizal.my_geer.Model.Booking;
 import com.syafrizal.my_geer.Model.BookingDishes;
@@ -41,6 +46,7 @@ public class ConfirmationFragment extends Fragment implements View.OnClickListen
     Spinner spinnerPayment,spinnerServe;
     TextView editText;
     Integer locationId ;
+    SharedPreferences preferences;
     Button buttonOrder;
 
     public void setRestaurantName(String restaurantName) {
@@ -78,6 +84,7 @@ public class ConfirmationFragment extends Fragment implements View.OnClickListen
         buttonOrder.setOnClickListener(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
+        preferences = this.getActivity().getSharedPreferences(Constant.SHARED_PREF, Context.MODE_PRIVATE);
 
 
         return view;
@@ -104,12 +111,21 @@ public class ConfirmationFragment extends Fragment implements View.OnClickListen
         bookingCall.enqueue(new Callback<Booking>() {
             @Override
             public void onResponse(Call<Booking> call, Response<Booking> response) {
-                Log.d("TES",response.body().toString());
-                bookingDish(0,response.body().getId());
+                if (response.code()==401){
+                    preferences.edit().clear().commit();
+                    Toast.makeText(getContext(),"You need to login again",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getActivity(), EmptyActivity.class);
+                    startActivity(intent);
+                    getActivity().finish();
+                }else{
+                    Toast.makeText(getContext(),"Order Placed",Toast.LENGTH_SHORT).show();
+                    ((MainActivity)getActivity()).addFragment("list");
+                }
             }
 
             @Override
             public void onFailure(Call<Booking> call, Throwable t) {
+                Toast.makeText(getContext(),"Check your connection",Toast.LENGTH_SHORT).show();
 
             }
         });

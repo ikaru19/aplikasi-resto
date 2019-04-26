@@ -14,9 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
 import com.syafrizal.my_geer.Adapter.RestaurantAdapter;
 import com.syafrizal.my_geer.Model.Dish;
 import com.syafrizal.my_geer.Model.Location;
@@ -76,15 +78,24 @@ public class RestaurantFragment extends Fragment implements RestaurantAdapter.On
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         adapter = new RestaurantAdapter(getContext());
         adapter.setListener(this);
+        ImageView image_Res = view.findViewById(R.id.iv_restaurant);
         getData();
 
+        Picasso.get().load(restaurant.getImage()).into(image_Res);
 
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
 
+
+
         btnConfirm = view.findViewById(R.id.btn_conf_menu);
+
+
+        if (orders.size()==0){
+            btnConfirm.setVisibility(View.GONE);
+        }
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -167,6 +178,7 @@ public class RestaurantFragment extends Fragment implements RestaurantAdapter.On
             public void onClick(DialogInterface dialog, int which) {
                 orders.add(new OrderMenu(menu.getId(),menu.getName(),qty,menu.getPrice()));
                 qty = 0;
+                btnConfirm.setVisibility(View.VISIBLE);
                 Toast.makeText(getContext(),"Added to Cart",Toast.LENGTH_SHORT).show();
             }
         });

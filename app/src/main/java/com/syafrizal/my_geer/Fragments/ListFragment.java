@@ -82,15 +82,17 @@ public class ListFragment extends Fragment implements ListsAdapter.OnAdapterClic
 
             @Override
             public void onFailure(Call<List<Booking>> call, Throwable t) {
-                // TODO errorresponse hanlder
+                Toast.makeText(getContext(),"Please Check Your Connection",Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     @Override
     public void DetailonClick(Booking booking) {
+        Fragment fragment = new TransDetailFragment();
+        ((TransDetailFragment) fragment).setBooking(booking);
         getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container,new TransDetailFragment())
+                .replace(R.id.fragment_container,fragment)
                 .addToBackStack("tag").commit();
     }
 }
