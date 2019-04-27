@@ -1,5 +1,6 @@
 package com.syafrizal.my_geer.Activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -56,6 +57,10 @@ public class LoginActivity extends AppCompatActivity {
 
 
     public void doLogin(Login login){
+        final ProgressDialog progress = new ProgressDialog(this);
+        progress.setMessage("Please Wait");
+        progress.setCancelable(false);
+        progress.show();
         Call<User> userCall = service.login(login);
         userCall.enqueue(new Callback<User>() {
             @Override
@@ -70,16 +75,19 @@ public class LoginActivity extends AppCompatActivity {
                             .putString(Constant.EMAIL,user.getEmail())
                             .putString(Constant.PHONE,user.getPhone())
                             .apply();
+                    progress.dismiss();
                     Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                     startActivity(intent);
                     finish();
                 }else{
+                    progress.dismiss();
                     Toast.makeText(LoginActivity.this,"Login is incorrect",Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
+                progress.dismiss();
                 Toast.makeText(LoginActivity.this,"Check Your Connection",Toast.LENGTH_SHORT).show();
             }
         });

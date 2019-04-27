@@ -84,7 +84,7 @@ public class ProfileRegisterActivity extends AppCompatActivity {
             register.setStatus("status");
 
             UserClient service = RestoApi.createService(UserClient.class);
-            Call<Regist> userCall = service.regiter(register);
+            Call<Regist> userCall = service.register(register);
             userCall.enqueue(new Callback<Regist>() {
                 @Override
                 public void onResponse(Call<Regist> call, Response<Regist> response) {
