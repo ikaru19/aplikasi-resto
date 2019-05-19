@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
     tools:context=".Activities.RegisterActivity">
 
     <android.support.v7.widget.CardView
@@ -19,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:cardElevation="5dp"
-        app:cardCornerRadius="10dp"
+        app:cardCornerRadius="20dp"
         android:foregroundGravity="center">
 
         <android.support.constraint.ConstraintLayout
@@ -28,17 +27,24 @@
             android:layout_gravity="center"
             android:padding="10dp">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Create Account"
+                app:layout_constraintBottom_toTopOf="@+id/etUsernameRegister"
+                tools:layout_editor_absoluteX="10dp" />
+
             <EditText
                 android:id="@+id/etUsernameRegister"
                 android:layout_width="0dp"
-                android:layout_height="42dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/edittextstyle"
                 android:ems="10"
                 android:hint="Username"
+                android:paddingLeft="25dp"
                 android:inputType="textEmailAddress"
-                android:padding="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +53,7 @@
             <EditText
                 android:id="@+id/etEmailRegister"
                 android:layout_width="0dp"
-                android:layout_height="42dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="28dp"
                 android:layout_marginEnd="8dp"
@@ -55,7 +61,8 @@
                 android:ems="10"
                 android:hint="Email"
                 android:inputType="textEmailAddress"
-                android:padding="10dp"
+                android:paddingLeft="25dp"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +71,7 @@
             <EditText
                 android:id="@+id/etPasswordRegister"
                 android:layout_width="0dp"
-                android:layout_height="42dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="28dp"
                 android:layout_marginEnd="8dp"
@@ -72,7 +79,8 @@
                 android:ems="10"
                 android:hint="Password"
                 android:inputType="textPassword"
-                android:padding="10dp"
+                android:paddingLeft="25dp"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etEmailRegister" />
@@ -80,14 +88,15 @@
             <EditText
                 android:id="@+id/etPhoneNumberReg"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="28dp"
                 android:layout_marginEnd="8dp"
                 android:ems="10"
                 android:hint="Phone Number "
                 android:background="@drawable/edittextstyle"
-                android:padding="10dp"
+                android:paddingLeft="25dp"
+
                 android:inputType="phone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -95,15 +104,15 @@
 
             <Button
                 android:id="@+id/btnContinueRegister"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="38dp"
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/buttonshape"
+                android:background="@drawable/button_shape"
                 android:onClick="registerConOnClick"
                 android:text="Continue"
-                android:textColor="#ffffff"
+                android:textColor="#000"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.495"
                 app:layout_constraintStart_toStartOf="parent"
