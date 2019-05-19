@@ -17,17 +17,14 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/grad_purple"
-        android:padding="10dp">
+        android:background="#fff"
+        >
 
         <ImageView
             android:id="@+id/iv_pin_restaurant"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/image1"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +37,6 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-
             android:fontFamily="sans-serif"
             android:text="TextView"
             android:textColor="#000"

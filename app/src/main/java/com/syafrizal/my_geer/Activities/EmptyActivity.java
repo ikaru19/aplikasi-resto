@@ -16,7 +16,7 @@ public class EmptyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_empty);
         SharedPreferences preferences = getSharedPreferences(Constant.SHARED_PREF,MODE_PRIVATE);
-        getSupportActionBar().hide();
+//        getSupportActionBar().hide();
 
         String token = preferences.getString(Constant.TOKEN_PREF,null);
 

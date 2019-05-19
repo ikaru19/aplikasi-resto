@@ -11,7 +11,6 @@
         android:id="@+id/imageView"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -29,15 +28,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:cardCornerRadius="10dp"
-        app:cardElevation="4dp">
-
-
+        >
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="10dp"
+            android:paddingBottom="30dp"
             android:orientation="vertical">
 
             <TextView
@@ -91,55 +88,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="16dp"
         android:background="@drawable/button_shape"
+        android:drawableRight="@drawable/ic_chevron_right_black_24dp"
         android:onClick="loginOnClick"
+        android:paddingHorizontal="26dp"
         android:shadowColor="@color/cardview_dark_background"
         android:shadowRadius="@android:integer/config_shortAnimTime"
         android:text="Login"
-        android:paddingHorizontal="26dp"
-        android:drawableRight="@drawable/ic_chevron_right_black_24dp"
         android:textColor="#000"
-        app:layout_constraintBottom_toTopOf="@+id/tv_create_account"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toEndOf="@+id/tv_create_account"
-        app:layout_constraintTop_toBottomOf="@+id/cardViewLogin"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/cardViewLogin" />
 
 
     <TextView
         android:id="@+id/tv_create_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="152dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="bottom"
         android:onClick="registerOnClick"
-        android:text="Dont have an account"
-        android:textSize="18dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.133"
+        android:text="Create new account"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonLogin"
+        app:layout_constraintEnd_toStartOf="@+id/buttonLogin"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardViewLogin" />
-
-    <Button
-        android:id="@+id/buttonRegister"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/button_shape"
-        android:text="Create Your Account"
-        android:textColor="#000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_create_account"
-        app:layout_constraintVertical_bias="0.058" />
+        app:layout_constraintTop_toTopOf="@+id/buttonLogin" />
 
 
 
