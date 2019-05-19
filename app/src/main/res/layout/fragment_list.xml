@@ -1,15 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragments.ListFragment">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvList"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
 
-    </android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/tv_bookings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Your Orders"
+            android:textColor="@color/vpi__background_holo_dark"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+          />
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="20dp"
+            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+           >
+
+        </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+
 
 </FrameLayout>
