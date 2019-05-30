@@ -52,7 +52,6 @@ public class PinAdapter extends RecyclerView.Adapter<PinAdapter.ViewHolder> {
         viewHolder.txtName.setText(location.getRestaurant().getName());
         viewHolder.txtAddr.setText(location.getAddress());
         Picasso.get().load(location.getRestaurant().getImage()).into(viewHolder.imgResto);
-
     }
 
     @Override

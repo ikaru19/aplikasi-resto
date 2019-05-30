@@ -42,8 +42,8 @@ public class ProfileFragment extends Fragment {
         TextView txtPhone = view.findViewById(R.id.txtProfileNumber);
 
         txtName.setText(preferences.getString(Constant.NAME,null));
-        txtEmail.setText("Email : "+ preferences.getString(Constant.EMAIL,null));
-        txtPhone.setText("Phone : "+preferences.getString(Constant.PHONE,null));
+        txtEmail.setText(""+ preferences.getString(Constant.EMAIL,null));
+        txtPhone.setText(""+preferences.getString(Constant.PHONE,null));
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override

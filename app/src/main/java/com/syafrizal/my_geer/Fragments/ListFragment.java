@@ -54,7 +54,6 @@ public class ListFragment extends Fragment implements ListsAdapter.OnAdapterClic
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         adapter = new ListsAdapter(getContext());
 
-        adapter.setBookings(bookings);
         adapter.setListener(this);
 
         recyclerView.setAdapter(adapter);
@@ -69,6 +68,7 @@ public class ListFragment extends Fragment implements ListsAdapter.OnAdapterClic
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initData();
+
     }
 
     public void initData(){
@@ -77,6 +77,8 @@ public class ListFragment extends Fragment implements ListsAdapter.OnAdapterClic
             @Override
             public void onResponse(Call<List<Booking>> call, Response<List<Booking>> response) {
                 bookings.addAll(response.body());
+                adapter.setBookings(bookings);
+
                 adapter.notifyDataSetChanged();
             }
 

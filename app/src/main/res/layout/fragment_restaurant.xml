@@ -10,35 +10,33 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/cardViewMenu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 android:id="@+id/tv_restaurant_name_menu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAlignment="center"
+                android:text="Warunk Upnormal"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
                 android:textColor="@color/vpi__background_holo_dark"
-                android:textSize="32dp"
+                android:textSize="24dp"
                 android:textStyle="bold" />
 
-        </android.support.v7.widget.CardView>
 
 
         <ImageView
             android:id="@+id/iv_restaurant"
             android:layout_width="0dp"
-            android:layout_height="100dp"
+
+            android:layout_height="250dp"
             android:layout_marginTop="8dp"
-            android:src="@drawable/image1"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardViewMenu" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_restaurant_name_menu" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_menus"
@@ -59,9 +57,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="28dp"
             android:text="Confirm"
-            android:background="@drawable/buttonshape"
+            android:background="@drawable/button_shape"
             android:textColor="#fff"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
